@@ -1,10 +1,11 @@
-import React, {Dispatch, SetStateAction, useState} from "react";
+import React, {useState} from "react";
 
 type UncontrolledAccordionPropsType = {
     title: string
 }
 type UncontrolledAccordionTitlePropsType = {
     title: string
+    onClick: ()=>void
 }
 export const UncontrolledAccordion = (props: UncontrolledAccordionPropsType) => {
 
@@ -14,9 +15,8 @@ export const UncontrolledAccordion = (props: UncontrolledAccordionPropsType) => 
         <div>
             <AccordionTitle
                 title={props.title}
+                onClick={()=>{setCollapsed(!collapsed)}}
             />
-            <button onClick={()=>{setCollapsed(false)}}>+</button>
-            <button onClick={()=>{setCollapsed(true)}}>-</button>
             {!collapsed && <AccordionBody/>}
         </div>
     )
@@ -25,7 +25,7 @@ export const UncontrolledAccordion = (props: UncontrolledAccordionPropsType) => 
 const AccordionTitle = (props: UncontrolledAccordionTitlePropsType) => {
     return (
         <div>
-            <h3 >{props.title}</h3>
+            <h3 onClick={()=>{props.onClick()}}>{props.title}</h3>
         </div>
     )
 }
